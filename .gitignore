@@ -1,5 +1,13 @@
-# Created by https://www.toptal.com/developers/gitignore/api/macos,go
-# Edit at https://www.toptal.com/developers/gitignore?templates=macos,go
+# Created by https://www.toptal.com/developers/gitignore/api/go
+# Edit at https://www.toptal.com/developers/gitignore?templates=go
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
 
 ### Go ###
 # If you prefer the allow list template instead of the deny list, see community template:
@@ -11,6 +19,9 @@
 *.dll
 *.so
 *.dylib
+/bin/
+/build/
+
 
 # Test binary, built with `go test -c`
 *.test
@@ -23,6 +34,12 @@
 
 # Go workspace file
 go.work
+
+# End of https://www.toptal.com/developers/gitignore/api/go
+
+
+# Created by https://www.toptal.com/developers/gitignore/api/macos
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos
 
 ### macOS ###
 # General
@@ -57,4 +74,12 @@ Temporary Items
 # iCloud generated files
 *.icloud
 
-# End of https://www.toptal.com/developers/gitignore/api/macos,go
+# End of https://www.toptal.com/developers/gitignore/api/macos
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+.serena/cache
