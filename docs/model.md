@@ -14,8 +14,8 @@ erDiagram
     UUID id PK
     UUID year FK
     UUID semester FK
-    DATE first_day "2025-04-01"
-    DATE final_day "2025-08-31"
+    DATE start_date "2025-04-01"
+    DATE end_date "2025-09-30"
   }
 
   school_yearly_grade_classes {
@@ -75,8 +75,8 @@ erDiagram
     UUID id PK
     UUID year FK
     UUID course_opening_period FK
-    DATE first_day "2025-04-07"
-    DATE final_day "2025-08-04"
+    DATE start_date "2025-04-07"
+    DATE end_date "2025-08-04"
   }
   school_yearly_course_opening_periods ||--o{ school_yearly_courses : ""
 
@@ -111,6 +111,7 @@ erDiagram
     TEXT email "faculty@fun.ac.jp"
   }
   faculties ||--o{ school_yearly_course_faculties : ""
+  faculties ||--o{ faculty_enrollment_periods : ""
 
   courses {
     UUID id PK
@@ -134,7 +135,7 @@ erDiagram
 
   course_child_categories {
     UUID id PK
-    UUID course_category PK
+    UUID course_category FK
     TEXT label "人間の形成, 社会への参加, 科学技術と環境の理解, 健康の保持, その他"
   }
   course_child_categories ||--o{ school_yearly_courses : ""
@@ -142,7 +143,22 @@ erDiagram
   timetable_periods {
     UUID id PK
     INTEGER day_of_week "0, 1, ..., 6; 日, 月, ..., 土"
-    INTEGER period "1, 2, 3, 4, 5, 6"
+    UUID daily_timetable_period FK
   }
   timetable_periods ||--o{ school_yearly_course_timetable_periods : ""
+
+  daily_timetable_periods {
+    UUID id PK
+    INTEGER period "1, 2, 3, 4, 5, 6"
+    TIME start_at "09:00+09:00"
+    TIME end_at "10:30+09:00"
+  }
+  daily_timetable_periods ||--o{ timetable_periods : ""
+
+  faculty_enrollment_periods {
+    UUID id PK
+    UUID faculty FK
+    DATE start_date "2025-04-01"
+    DATE end_date "2025-09-30; Optional; start_date が最新で、end_date が NULL の場合、在籍中"
+  }
 ```
