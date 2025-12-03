@@ -159,6 +159,6 @@ erDiagram
     UUID id PK
     UUID faculty FK
     DATE start_date "2025-04-01"
-    DATE end_date "2025-09-30; Optional; start_date が最新で、end_date が NULL の場合、在籍中"
+    DATE end_date "Optional, e.g. 2025-09-30. If start_date is latest and end_date is NULL, currently enrolled."
   }
 ```
