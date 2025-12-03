@@ -33,19 +33,24 @@ erDiagram
     UUID course_child_category FK "Optional"
     UUID school_yearly_course_opening_periods FK "開講時期"
     UUID school_yearly_grade_class FK "対象クラス"
-    UUID faculties FK "担当教員"
     INTEGER number_of_units "単位数"
     TEXT academic_affairs_system_lesson_id "教務システム上の授業コード"
   }
   school_yearly_courses ||--o{ school_yearly_course_academic_areas : ""
+  school_yearly_courses ||--o{ school_yearly_course_timetable_periods : ""
+  school_yearly_courses ||--o{ school_yearly_course_faculties : ""
+
+  school_yearly_course_faculties {
+    UUID id PK
+    UUID school_yearly_course FK
+    UUID faculty FK "担当教員"
+  }
 
   school_yearly_course_timetable_periods {
     UUID id PK
     UUID school_yearly_course FK
     UUID timetable_period FK
   }
-  school_yearly_course_timetable_periods ||--o{ school_yearly_courses : ""
-  school_yearly_course_timetable_periods ||--o{ timetable_periods : ""
 
   school_yearly_course_academic_areas {
     UUID id PK
@@ -105,7 +110,7 @@ erDiagram
     TEXT name
     TEXT email "faculty@fun.ac.jp"
   }
-  faculties }|--o{ school_yearly_courses : ""
+  faculties ||--o{ school_yearly_course_faculties : ""
 
   courses {
     UUID id PK
@@ -139,4 +144,5 @@ erDiagram
     INTEGER day_of_week "0, 1, ..., 6; 日, 月, ..., 土"
     INTEGER period "1, 2, 3, 4, 5, 6"
   }
+  timetable_periods ||--o{ school_yearly_course_timetable_periods : ""
 ```
