@@ -135,7 +135,7 @@ erDiagram
 
   course_child_categories {
     UUID id PK
-    UUID course_category FK
+    UUID course_intermediate_category FK
     TEXT label "人間の形成, 社会への参加, 科学技術と環境の理解, 健康の保持, その他"
   }
   course_child_categories ||--o{ school_yearly_courses : ""
